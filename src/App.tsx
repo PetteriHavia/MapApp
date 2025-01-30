@@ -1,30 +1,28 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import "leaflet/dist/leaflet.css";
+import { MapContainer, Marker, TileLayer, Popup } from "react-leaflet";
+import { useState } from "react";
+import Controls from "./components/Controls";
+import { Coords } from "./types";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [userLocation, setUserLocation] = useState<Coords>();
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </>
+    <div className="w-full h-dvh flex justify-center items-center flex-col">
+      <Controls setUserLocation={setUserLocation} />
+      <MapContainer center={[51.505, -0.09]} zoom={13} className="w-9/10 h-[800px]">
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        {userLocation && (
+          <Marker position={[userLocation.latitude, userLocation.longitude]}>
+            <Popup>Here i am</Popup>
+          </Marker>
+        )}
+      </MapContainer>
+    </div>
   );
 }
 
