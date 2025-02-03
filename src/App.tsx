@@ -4,6 +4,7 @@ import { MapContainer, Marker, TileLayer, Popup } from "react-leaflet";
 import { useEffect, useRef, useState } from "react";
 import Controls from "./components/Controls";
 import { Coords } from "./types";
+import LayerControlComponent from "./components/LayerControl";
 
 function App() {
   const [userLocation, setUserLocation] = useState<Coords>();
@@ -23,6 +24,7 @@ function App() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        <LayerControlComponent />
         {userLocation && (
           <Marker position={[userLocation.latitude, userLocation.longitude]}>
             <Popup>Here i am</Popup>
