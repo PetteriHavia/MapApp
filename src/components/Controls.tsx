@@ -26,7 +26,9 @@ const Controls = ({ setUserLocation }: Props) => {
   return (
     <div>
       {error && <p>{error}</p>}
-      <button onClick={handleClick}>Find Me</button>
+      <button className={"px-8 py-3 bg-sky-400 text-neutral-50 rounded-sm text-lg font-bold"} onClick={handleClick}>
+        Find Me
+      </button>
     </div>
   );
 };
