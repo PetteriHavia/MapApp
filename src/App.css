@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+.leaflet-control-layers {
+  padding: 0.5rem;
+}
+
+.leaflet-control-layers-base {
+  padding: 1rem;
+
+  :last-child {
+    margin-bottom: 0;
+  }
+}
+
+.leaflet-control-layers-base label {
+  margin-bottom: 0.5rem;
+}

@@ -3,7 +3,7 @@ import { LayersControl, TileLayer } from "react-leaflet";
 const LayerControlComponent = () => {
   return (
     <LayersControl position="topright">
-      <LayersControl.BaseLayer checked name="Marker with popup">
+      <LayersControl.BaseLayer checked name="OpenStreetMap">
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       </LayersControl.BaseLayer>
       <LayersControl.BaseLayer name="OpenStreetMap HOT">
