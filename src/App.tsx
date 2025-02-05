@@ -6,22 +6,24 @@ import Controls from "./components/Controls";
 import { Coords } from "./types";
 import LayerControlComponent from "./components/LayerControl";
 import MapFlyTo from "./components/MapFlyTo";
+import MapGeolocation from "./components/MapGeolocation";
 
 function App() {
-  const [userLocation, setUserLocation] = useState<Coords>();
+  const [location, setLocation] = useState<Coords>();
 
   return (
     <div className="w-full h-dvh flex justify-center items-center flex-col">
-      <Controls setUserLocation={setUserLocation} />
+      <MapGeolocation setLocation={setLocation} />
+      <Controls setLocation={setLocation} />
       <MapContainer center={[51.505, -0.09]} zoom={13} className="w-9/10 h-[800px]">
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <LayerControlComponent />
-        <MapFlyTo userLocation={userLocation} />
-        {userLocation && (
-          <Marker position={[userLocation.latitude, userLocation.longitude]}>
+        <MapFlyTo location={location} />
+        {location && (
+          <Marker position={[location.latitude, location.longitude]}>
             <Popup>Here i am</Popup>
           </Marker>
         )}
