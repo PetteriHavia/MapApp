@@ -3,10 +3,10 @@ import { useState } from "react";
 import { Coords } from "../types";
 
 type Props = {
-  setUserLocation: React.Dispatch<React.SetStateAction<Coords | undefined>>;
+  setLocation: React.Dispatch<React.SetStateAction<Coords | undefined>>;
 };
 
-const Controls = ({ setUserLocation }: Props) => {
+const Controls = ({ setLocation }: Props) => {
   const [error, setError] = useState<string | null>();
   const { geolocation } = navigator;
 
@@ -16,9 +16,8 @@ const Controls = ({ setUserLocation }: Props) => {
       return;
     }
     geolocation.getCurrentPosition((position) => {
-      console.log(position.coords);
       const { latitude, longitude } = position.coords;
-      setUserLocation({ latitude, longitude });
+      setLocation({ latitude, longitude });
     });
     setError(null);
   };
