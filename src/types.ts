@@ -1,4 +1,9 @@
 export interface Coords {
-  latitude: number;
-  longitude: number;
+  lat: number;
+  lon: number;
+}
+
+export interface RouteCoords {
+  start: Coords;
+  end: Coords;
 }
