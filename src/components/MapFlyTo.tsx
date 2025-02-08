@@ -6,7 +6,7 @@ const MapFlyTo = ({ location }: { location?: Coords }) => {
   const map = useMap();
   useEffect(() => {
     if (location) {
-      map.flyTo([location.latitude, location.longitude], 13);
+      map.flyTo([location.lat, location.lon], 13);
     }
   }, [location, map]);
   return null;
