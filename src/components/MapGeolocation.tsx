@@ -13,20 +13,14 @@ const MapGeolocation = ({ setLocation }: Props) => {
   const handleSearchAddress = async () => {
     try {
       setError(null);
-      const params = {
-        q: address,
-        limit: "1",
-        format: "json",
-      };
-      const format = new URLSearchParams(params).toString();
-      const searchAddress = await getAddress(format);
+      const searchAddress = await getAddress(address);
       if (!searchAddress) {
         setError("Location not found, Please try another address");
         return;
       }
       setLocation({
-        latitude: Number(searchAddress.lat),
-        longitude: Number(searchAddress.lon),
+        lat: Number(searchAddress.lat),
+        lon: Number(searchAddress.lon),
       });
     } catch (error) {
       setError("Failed to fetch location. Please try again");
