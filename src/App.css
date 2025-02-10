@@ -15,3 +15,9 @@
 .leaflet-control-layers-base label {
   margin-bottom: 0.5rem;
 }
+
+.leaflet-routing-container-hide .leaflet-routing-collapse-btn {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
