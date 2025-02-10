@@ -6,9 +6,11 @@ import { getAddress } from "../services/nominativeService";
 type Props = {
   setLocation: React.Dispatch<React.SetStateAction<Coords | undefined>>;
   setRoute: React.Dispatch<React.SetStateAction<RouteCoords | undefined>>;
+  altRoute: boolean;
+  setAltRoute: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Controls = ({ setLocation, setRoute }: Props) => {
+const Controls = ({ setLocation, setRoute, altRoute, setAltRoute }: Props) => {
   const [error, setError] = useState<string | null>();
   const [start, setStart] = useState<string>("");
   const [end, setEnd] = useState<string>("");
@@ -47,6 +49,8 @@ const Controls = ({ setLocation, setRoute }: Props) => {
       <input placeholder="Start" value={start} onChange={(e) => setStart(e.target.value)} />
       <input placeholder="End" value={end} onChange={(e) => setEnd(e.target.value)} />
       <button onClick={handleSearchAddresses}>Check route</button>
+      <label>Show alternative routes</label>
+      <input name="alternativ route" type="checkbox" onChange={() => setAltRoute(!altRoute)} />
     </div>
   );
 };

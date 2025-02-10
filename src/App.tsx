@@ -13,11 +13,12 @@ import RoutingMachine from "./components/RoutingMachine";
 function App() {
   const [location, setLocation] = useState<Coords>();
   const [route, setRoute] = useState<RouteCoords>();
+  const [altRoute, setAltRoute] = useState<boolean>(false);
   console.log(route);
   return (
     <div className="w-full h-dvh flex justify-center items-center flex-col">
       <MapGeolocation setLocation={setLocation} />
-      <Controls setLocation={setLocation} setRoute={setRoute} />
+      <Controls setLocation={setLocation} setRoute={setRoute} setAltRoute={setAltRoute} altRoute={altRoute} />
       <MapContainer center={[51.505, -0.09]} zoom={13} className="w-9/10 h-[800px]">
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -25,7 +26,7 @@ function App() {
         />
         <LayerControlComponent />
         <MapFlyTo location={location} />
-        {route && <RoutingMachine route={route} />}
+        {route && <RoutingMachine route={route} altRoute={altRoute} />}
         {location && (
           <Marker position={[location.lat, location.lon]}>
             <Popup>Here i am</Popup>
