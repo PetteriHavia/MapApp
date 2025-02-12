@@ -26,7 +26,7 @@ const RoutingMachine = ({ altRoute, route }: Props) => {
         styles: [{ color: "#1c4ae0", weight: 4 }],
       },
       show: true,
-      autoRoute: false,
+      autoRoute: true,
       addWaypoints: false,
       draggableWaypoints: true,
       fitSelectedRoutes: true,
