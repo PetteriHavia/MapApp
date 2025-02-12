@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+.btn-primary {
+  @apply rounded px-4 py-2 bg-sky-400 text-neutral-50 rounded-sm text-base font-semibold;
+}
+
+.input-primary {
+  @apply rounded border px-4 py-2 rounded-sm text-base font-normal w-full;
+}
+
 .leaflet-control-layers {
   padding: 0.5rem;
 }
