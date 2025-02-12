@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { getAddress } from "../services/nominativeService";
-import { Coords } from "../types";
+import { getAddress } from "../../services/nominativeService";
+import { Coords } from "../../types";
 
 type Props = {
   setLocation: React.Dispatch<React.SetStateAction<Coords | undefined>>;
@@ -29,10 +29,18 @@ const MapGeolocation = ({ setLocation }: Props) => {
   };
 
   return (
-    <div>
+    <div className="">
       {error && <p>{error}</p>}
-      <input type="text" placeholder="Type address" value={address} onChange={(e) => setAddress(e.target.value)} />
-      <button onClick={handleSearchAddress}>Search</button>
+      <input
+        className="input-primary mb-2"
+        type="text"
+        placeholder="Type address"
+        value={address}
+        onChange={(e) => setAddress(e.target.value)}
+      />
+      <button className="btn-primary w-full" onClick={handleSearchAddress}>
+        Search
+      </button>
     </div>
   );
 };
