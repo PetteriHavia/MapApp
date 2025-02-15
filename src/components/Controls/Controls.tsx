@@ -10,15 +10,16 @@ type Props = {
   setLocation: React.Dispatch<React.SetStateAction<Coords | undefined>>;
   setRoute: React.Dispatch<React.SetStateAction<RouteCoords | undefined>>;
   setAltRoute: React.Dispatch<React.SetStateAction<boolean>>;
+  setDrawerToggle: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Controls = ({ setLocation, setRoute, setAltRoute }: Props) => {
+const Controls = ({ setLocation, setRoute, setAltRoute, setDrawerToggle }: Props) => {
   const [error, setError] = useState<string | null>();
   const [routePoints, setRoutePoints] = useState<RoutePoints>({
     start: "",
     end: "",
   });
-  const [tabIndex, setTabIndex] = useState(0);
+  const [tabIndex, setTabIndex] = useState<number>(0);
   const { geolocation } = navigator;
 
   const handleClick = () => {
@@ -49,11 +50,11 @@ const Controls = ({ setLocation, setRoute, setAltRoute }: Props) => {
   };
 
   const tabs = [
-    { index: 0, label: "First", content: <MapGeolocation setLocation={setLocation} /> },
-    { index: 1, label: "Second", content: <FindDevice handleClick={handleClick} /> },
+    { index: 0, label: "Location", content: <MapGeolocation setLocation={setLocation} /> },
+    { index: 1, label: "Find Device", content: <FindDevice handleClick={handleClick} /> },
     {
       index: 2,
-      label: "Third",
+      label: "Route Planner",
       content: (
         <RoutePlanner
           setRoutePoints={setRoutePoints}
@@ -69,9 +70,16 @@ const Controls = ({ setLocation, setRoute, setAltRoute }: Props) => {
   return (
     <div>
       {error && <p>{error}</p>}
-      <div className="flex gap-4 mb-5">
+      <div className="flex gap-4 mb-5 relative">
+        <p onClick={() => setDrawerToggle((prev) => !prev)} className="absolute top-0 right-0">
+          X
+        </p>
         {tabs.map((tab) => (
-          <p key={tab.index} onClick={() => setTabIndex(tab.index)}>
+          <p
+            key={tab.index}
+            onClick={() => setTabIndex(tab.index)}
+            className={`pb-1 ${tabIndex === tab.index ? "border-b-3 rounded-xs border-sky-400" : ""}`}
+          >
             {tab.label}
           </p>
         ))}
