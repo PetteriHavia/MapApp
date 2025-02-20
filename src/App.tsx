@@ -14,15 +14,14 @@ function App() {
 
   return (
     <div className="flex relative">
-      <div
-        className={`absolute left-20 bg-white z-2 p-2 mt-[10px] rounded-sm btn-primary ${drawerToggle ? "" : "hidden"}`}
-      >
-        <button onClick={() => setDrawerToggle((prev) => !prev)}>OPEN NAVIGATION</button>
+      <div className={`absolute left-20 bg-white z-2 mt-[10px] ${drawerToggle ? "hidden" : ""}`}>
+        <button className="btn-primary" onClick={() => setDrawerToggle((prev) => !prev)}>
+          OPEN NAVIGATION
+        </button>
       </div>
       <div
-        className={`transition-all duration-300 z-3 ${
-          drawerToggle ? "-translate-x-100 w-0 p-0 overflow-hidden" : "w-110 p-5"
-        } bg-white`}
+        className={`transition-transform duration-300 transition-max-w ease-in-out z-3 flex-shrink-0 bg-white w-full
+         ${drawerToggle ? "translate-x-0 max-w-[350px] p-5" : "-translate-x-full max-w-0 overflow-hidden p-0"}`}
       >
         <Controls
           setLocation={setLocation}
