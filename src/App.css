@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .btn-primary {
-  @apply rounded px-4 py-2 bg-sky-400 text-neutral-50 rounded-sm text-base font-semibold;
+  @apply rounded px-4 py-2 bg-sky-400 text-neutral-50 rounded-sm text-base font-semibold cursor-pointer;
 }
 
 .input-primary {

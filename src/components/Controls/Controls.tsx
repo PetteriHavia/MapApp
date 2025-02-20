@@ -70,10 +70,13 @@ const Controls = ({ setLocation, setRoute, setAltRoute, setDrawerToggle }: Props
   return (
     <div>
       {error && <p>{error}</p>}
-      <div className="flex gap-4 mb-5 relative">
-        <p onClick={() => setDrawerToggle((prev) => !prev)} className="absolute top-0 right-0">
-          X
-        </p>
+      <div className="flex mr-5 justify-end mr-5">
+        <button className="relative cursor-pointer" onClick={() => setDrawerToggle((prev) => !prev)}>
+          <span className="absolute bg-stone-950 block h-[2px] w-5 rotate-45"></span>
+          <span className="absolute bg-stone-950 block h-[2px] w-5 -rotate-45"></span>
+        </button>
+      </div>
+      <div className="flex gap-4 mb-5 mt-5">
         {tabs.map((tab) => (
           <p
             key={tab.index}
