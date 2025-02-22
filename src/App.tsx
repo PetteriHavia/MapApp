@@ -14,14 +14,18 @@ function App() {
 
   return (
     <div className="flex relative">
-      <div className={`absolute left-20 bg-white z-2 mt-[10px] ${drawerToggle ? "hidden" : ""}`}>
+      <div
+        className={`absolute left-20 bg-white z-2 mt-[10px] transition-all duration-500 transition-top ${
+          drawerToggle ? "-translate-y-20" : ""
+        }`}
+      >
         <button className="btn-primary" onClick={() => setDrawerToggle((prev) => !prev)}>
           OPEN NAVIGATION
         </button>
       </div>
       <div
-        className={`transition-transform duration-300 transition-max-w ease-in-out z-3 flex-shrink-0 bg-white w-full
-         ${drawerToggle ? "translate-x-0 max-w-[350px] p-5" : "-translate-x-full max-w-0 overflow-hidden p-0"}`}
+        className={`whitespace-nowrap transition-all duration-500 transition-w ease-in-out z-3 bg-white pt-5
+         ${drawerToggle ? "w-full max-w-[350px] p-5 overflow-hidden" : "w-0 max-w-0 overflow-hidden"}`}
       >
         <Controls
           setLocation={setLocation}
@@ -30,7 +34,7 @@ function App() {
           setDrawerToggle={setDrawerToggle}
         />
       </div>
-      <MapContainer center={[51.505, -0.09]} zoom={13} className="w-full h-full h-screen z-1">
+      <MapContainer center={[51.505, -0.09]} zoom={13} className=" size-full h-screen z-1">
         <MapWrapper location={location} route={route} altRoute={altRoute} drawerToggle={drawerToggle} />
       </MapContainer>
     </div>

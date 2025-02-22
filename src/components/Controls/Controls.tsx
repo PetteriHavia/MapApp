@@ -71,7 +71,7 @@ const Controls = ({ setLocation, setRoute, setAltRoute, setDrawerToggle }: Props
     <div>
       {error && <p>{error}</p>}
       <div className="flex mr-5 justify-end mr-5">
-        <button className="relative cursor-pointer" onClick={() => setDrawerToggle((prev) => !prev)}>
+        <button className="relative cursor-pointer p-1" onClick={() => setDrawerToggle((prev) => !prev)}>
           <span className="absolute bg-stone-950 block h-[2px] w-5 rotate-45"></span>
           <span className="absolute bg-stone-950 block h-[2px] w-5 -rotate-45"></span>
         </button>
@@ -81,7 +81,7 @@ const Controls = ({ setLocation, setRoute, setAltRoute, setDrawerToggle }: Props
           <p
             key={tab.index}
             onClick={() => setTabIndex(tab.index)}
-            className={`pb-1 ${tabIndex === tab.index ? "border-b-3 rounded-xs border-sky-400" : ""}`}
+            className={`pb-1 ${tabIndex === tab.index ? "border-b-3 rounded-xs border-sky-400" : ""} flex-shrink-0`}
           >
             {tab.label}
           </p>
