@@ -29,7 +29,7 @@ const MapGeolocation = ({ setLocation }: Props) => {
   };
 
   return (
-    <div className="">
+    <div className="flex flex-col">
       {error && <p>{error}</p>}
       <input
         className="input-primary mb-2"
