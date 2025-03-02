@@ -1,10 +1,10 @@
-import React from "react";
+import React, { memo } from "react";
 import { useState } from "react";
-import { Coords, RouteCoords, RoutePoints } from "../../types";
-import { getAddress } from "../../services/nominativeService";
+import { Coords, RouteCoords } from "../../types";
 import MapGeolocation from "./MapGeolocation";
 import FindDevice from "./FindDevice";
 import RoutePlanner from "./RoutePlanner";
+import { TabIndex } from "../../types";
 
 type Props = {
   setLocation: React.Dispatch<React.SetStateAction<Coords | undefined>>;
@@ -13,63 +13,21 @@ type Props = {
   setDrawerToggle: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Controls = ({ setLocation, setRoute, setAltRoute, setDrawerToggle }: Props) => {
-  const [error, setError] = useState<string | null>();
-  const [routePoints, setRoutePoints] = useState<RoutePoints>({
-    start: "",
-    end: "",
-  });
-  const [tabIndex, setTabIndex] = useState<number>(0);
-  const { geolocation } = navigator;
-
-  const handleClick = () => {
-    if (!geolocation) {
-      setError("Geolocation is not supported by the current browser");
-      return;
-    }
-    geolocation.getCurrentPosition((position) => {
-      const { latitude, longitude } = position.coords;
-      setLocation({ lat: latitude, lon: longitude });
-    });
-    setError(null);
-  };
-
-  const handleSearchAddresses = async () => {
-    const [startLocation, endLocation] = await Promise.all([
-      getAddress(routePoints.start),
-      getAddress(routePoints.end),
-    ]);
-    if (!startLocation || !endLocation) {
-      console.log("An error has occured");
-      return;
-    }
-    setRoute({
-      start: { lat: startLocation.lat, lon: startLocation.lon },
-      end: { lat: endLocation.lat, lon: endLocation.lon },
-    });
-  };
+const Controls = memo(({ setLocation, setRoute, setAltRoute, setDrawerToggle }: Props) => {
+  const [tabIndex, setTabIndex] = useState<TabIndex>(TabIndex.Location);
 
   const tabs = [
     { index: 0, label: "Location", content: <MapGeolocation setLocation={setLocation} /> },
-    { index: 1, label: "Find Device", content: <FindDevice handleClick={handleClick} /> },
+    { index: 1, label: "Find Device", content: <FindDevice setLocation={setLocation} /> },
     {
       index: 2,
       label: "Route Planner",
-      content: (
-        <RoutePlanner
-          setRoutePoints={setRoutePoints}
-          routePoints={routePoints}
-          setRoute={setRoute}
-          onSearch={handleSearchAddresses}
-          setAltRoute={setAltRoute}
-        />
-      ),
+      content: <RoutePlanner setRoute={setRoute} setAltRoute={setAltRoute} />,
     },
   ];
 
   return (
-    <div>
-      {error && <p>{error}</p>}
+    <div className="grow">
       <div className="flex mr-5 justify-end mr-5">
         <button className="relative cursor-pointer p-1" onClick={() => setDrawerToggle((prev) => !prev)}>
           <span className="absolute bg-stone-950 block h-[2px] w-5 rotate-45"></span>
@@ -81,7 +39,7 @@ const Controls = ({ setLocation, setRoute, setAltRoute, setDrawerToggle }: Props
           <p
             key={tab.index}
             onClick={() => setTabIndex(tab.index)}
-            className={`pb-1 ${tabIndex === tab.index ? "border-b-3 rounded-xs border-sky-400" : ""} flex-shrink-0`}
+            className={`pb-1 ${tabIndex === tab.index ? "border-b-3 rounded-xs border-sky-400" : ""} shrink-0`}
           >
             {tab.label}
           </p>
@@ -90,6 +48,6 @@ const Controls = ({ setLocation, setRoute, setAltRoute, setDrawerToggle }: Props
       {tabs[tabIndex].content}
     </div>
   );
-};
+});
 
 export default Controls;

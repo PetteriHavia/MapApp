@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { getAddress } from "../../services/nominativeService";
 import { Coords } from "../../types";
+import ErrorMessage from "../ErrorMessage";
 
 type Props = {
   setLocation: React.Dispatch<React.SetStateAction<Coords | undefined>>;
@@ -30,7 +31,7 @@ const MapGeolocation = ({ setLocation }: Props) => {
 
   return (
     <div className="flex flex-col">
-      {error && <p>{error}</p>}
+      {error && <ErrorMessage message={error} />}
       <input
         className="input-primary mb-2"
         type="text"

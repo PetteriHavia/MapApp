@@ -12,3 +12,9 @@ export interface RoutePoints {
   start: string;
   end: string;
 }
+
+export enum TabIndex {
+  Location = 0,
+  FindDevice = 1,
+  RoutePlanner = 2,
+}
