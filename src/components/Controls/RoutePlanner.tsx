@@ -1,15 +1,20 @@
-import React from "react";
+import { useState } from "react";
 import { RouteCoords, RoutePoints } from "../../types";
+import { getAddress } from "../../services/nominativeService";
+import { memo } from "react";
+import ErrorMessage from "../ErrorMessage";
 
 type Props = {
   setAltRoute: React.Dispatch<React.SetStateAction<boolean>>;
-  onSearch: () => Promise<void>;
   setRoute: React.Dispatch<React.SetStateAction<RouteCoords | undefined>>;
-  setRoutePoints: React.Dispatch<React.SetStateAction<RoutePoints>>;
-  routePoints: RoutePoints;
 };
 
-const RoutePlanner = ({ setAltRoute, onSearch, setRoutePoints, routePoints }: Props) => {
+const RoutePlanner = memo(({ setAltRoute, setRoute }: Props) => {
+  const [error, setError] = useState<null | string>(null);
+  const [routePoints, setRoutePoints] = useState<RoutePoints>({
+    start: "",
+    end: "",
+  });
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setRoutePoints((prev) => ({
@@ -18,33 +23,55 @@ const RoutePlanner = ({ setAltRoute, onSearch, setRoutePoints, routePoints }: Pr
     }));
   };
 
+  const handleSearchAddresses = async () => {
+    try {
+      const [startLocation, endLocation] = await Promise.all([
+        getAddress(routePoints.start),
+        getAddress(routePoints.end),
+      ]);
+      if (!startLocation || !endLocation) {
+        throw new Error("Invalid address. Please check your inputs.");
+      }
+      setRoute({
+        start: { lat: startLocation.lat, lon: startLocation.lon },
+        end: { lat: endLocation.lat, lon: endLocation.lon },
+      });
+      setError(null);
+    } catch (error) {
+      setError(error instanceof Error ? error.message : "An unknown error occured");
+    }
+  };
+
   return (
-    <div className="flex flex-col gap-2">
+    <>
+      {error && <ErrorMessage message={error} />}
       <div className="flex flex-col gap-2">
-        <input
-          className="input-primary"
-          name="start"
-          placeholder="Start"
-          value={routePoints.start}
-          onChange={handleInputChange}
-        />
-        <input
-          className="input-primary"
-          name="end"
-          placeholder="End"
-          value={routePoints.end}
-          onChange={handleInputChange}
-        />
+        <div className="flex flex-col gap-2">
+          <input
+            className="input-primary"
+            name="start"
+            placeholder="Start"
+            value={routePoints.start}
+            onChange={handleInputChange}
+          />
+          <input
+            className="input-primary"
+            name="end"
+            placeholder="End"
+            value={routePoints.end}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <input name="alternative route" type="checkbox" onChange={() => setAltRoute((prev) => !prev)} />
+          <label className="ml-2">Show alternative routes</label>
+        </div>
+        <button className="btn-primary" onClick={handleSearchAddresses}>
+          Check Route
+        </button>
       </div>
-      <div>
-        <input name="alternative route" type="checkbox" onChange={() => setAltRoute((prev) => !prev)} />
-        <label className="ml-2">Show alternative routes</label>
-      </div>
-      <button className="btn-primary" onClick={onSearch}>
-        Check Route
-      </button>
-    </div>
+    </>
   );
-};
+});
 
 export default RoutePlanner;

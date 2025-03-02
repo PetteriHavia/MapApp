@@ -24,7 +24,7 @@ function App() {
         </button>
       </div>
       <div
-        className={`whitespace-nowrap transition-all duration-500 transition-w ease-in-out z-3 bg-white pt-5
+        className={`flex transition-all duration-500 transition-w ease-in-out z-3 bg-white pt-5
          ${drawerToggle ? "w-full max-w-[350px] p-5 overflow-hidden" : "w-0 max-w-0 overflow-hidden"}`}
       >
         <Controls
