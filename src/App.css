@@ -27,5 +27,28 @@
 .leaflet-routing-container-hide .leaflet-routing-collapse-btn {
   left: 50%;
   top: 50%;
+  right: 20px;
   transform: translate(-50%, -50%);
+}
+
+.leaflet-routing-alt table {
+  border-collapse: separate;
+  border-spacing: 0.5rem;
+  align-items: start;
+}
+
+.leaflet-routing-alt tbody > tr {
+  vertical-align: baseline;
+}
+
+.leaflet-routing-alt {
+  max-height: 500px;
+
+  h2 {
+    font-size: 18px;
+  }
+
+  h3 {
+    font-size: 14px;
+  }
 }
