@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="flex relative">
       <div
-        className={`absolute left-20 bg-white z-2 mt-[10px] transition-all duration-500 transition-top ${
+        className={`absolute left-15 bg-white z-2 mt-[10px] transition-all duration-500 transition-top ${
           drawerToggle ? "-translate-y-20" : ""
         }`}
       >
@@ -24,8 +24,12 @@ function App() {
         </button>
       </div>
       <div
-        className={`flex transition-all duration-500 transition-w ease-in-out z-3 bg-white pt-5
-         ${drawerToggle ? "w-full max-w-[350px] p-5 overflow-hidden" : "w-0 max-w-0 overflow-hidden"}`}
+        className={`flex transition-all duration-500 transition-w ease-in-out z-3 bg-white pt-5 sm:min-w-0
+         ${
+           drawerToggle
+             ? "w-full max-w-[350px] p-5 overflow-hidden min-w-[325px]"
+             : "w-0 max-w-0 overflow-hidden min-w-[0px]"
+         }`}
       >
         <Controls
           setLocation={setLocation}
