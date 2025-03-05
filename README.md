@@ -1,50 +1,32 @@
-# React + TypeScript + Vite
+# MapApp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+MapApp is a web application built using React, Leaflet, React-Leaflet, TypeScript, and Tailwind CSS. This app allows users to search for locations, get their current device location, and plan routes.
 
-Currently, two official plugins are available:
+## Tech Stack Overview
+- React: Frontend framework for building UI components.
+- Leaflet & React-Leaflet: For interactive mapping features
+- TypeScript: Ensures type safety and better code maintainability.
+- Tailwind CSS: Provides a responsive and modern design.
+- Nominatim API: Used for geocoding and address lookups.
+- Leaflet Router Machine: Handles route planning and navigation.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+### 🌍Location Search
+User can search for locations using different tabs in the slider menu:
 
-## Expanding the ESLint configuration
+- Find Device: Retrieves and displays the current device's location on the map.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Search Location: Type address, and the app fetches its location using the Nominatim API.
 
-- Configure the top-level `parserOptions` property like this:
+- Route Planner: Takes start and end location. The app fetches their locations using Nominatim API and then utilizes Leaflet Router Machine to display the route along with step-by-step navigation instructions.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### 📌Interactive Map
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- When searching for an address, the map will automatically fly to the location.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- Users can toggle between different map views:
+    - Standard OpenStreetMap View
+    - Topo Map
+    - Hot Map
+  
+Happy mapping! 🗺️
