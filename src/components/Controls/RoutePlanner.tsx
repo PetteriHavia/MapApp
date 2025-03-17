@@ -3,6 +3,7 @@ import { RouteCoords, RoutePoints } from "../../types";
 import { getAddress } from "../../services/nominativeService";
 import { memo } from "react";
 import ErrorMessage from "../ErrorMessage";
+import useDebounce from "../../hooks/useDebounce";
 
 type Props = {
   setAltRoute: React.Dispatch<React.SetStateAction<boolean>>;
@@ -42,6 +43,8 @@ const RoutePlanner = memo(({ setAltRoute, setRoute }: Props) => {
     }
   };
 
+  const debouncedHandleSearch = useDebounce(handleSearchAddresses, 1000);
+
   return (
     <>
       {error && <ErrorMessage message={error} />}
@@ -66,7 +69,7 @@ const RoutePlanner = memo(({ setAltRoute, setRoute }: Props) => {
           <input name="alternative route" type="checkbox" onChange={() => setAltRoute((prev) => !prev)} />
           <label className="ml-2">Show alternative routes</label>
         </div>
-        <button className="btn-primary" onClick={handleSearchAddresses}>
+        <button className="btn-primary" onClick={debouncedHandleSearch}>
           Check Route
         </button>
       </div>

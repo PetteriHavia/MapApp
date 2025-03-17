@@ -1,9 +1,10 @@
-type Props = {
-  setLocation: React.Dispatch<React.SetStateAction<Coords | undefined>>;
-};
 import { useState } from "react";
 import { Coords } from "../../types";
 import ErrorMessage from "../ErrorMessage";
+
+type Props = {
+  setLocation: React.Dispatch<React.SetStateAction<Coords | undefined>>;
+};
 
 const FindDevice = ({ setLocation }: Props) => {
   const [error, setError] = useState<null | string>(null);
