@@ -20,6 +20,9 @@ User can search for locations using different tabs in the slider menu:
 
 - Route Planner: Takes start and end location. The app fetches their locations using Nominatim API and then utilizes Leaflet Router Machine to display the route along with step-by-step navigation instructions.
 
+
+![img](https://github.com/PetteriHavia/MapApp/blob/56b37ffd861a3f14fc8dbf9258dcc390abb54616/src/assets/readme_images/map-route-planner.jpg)
+
 ### 📌Interactive Map
 
 - When searching for an address, the map will automatically fly to the location.
@@ -28,5 +31,8 @@ User can search for locations using different tabs in the slider menu:
     - Standard OpenStreetMap View
     - Topo Map
     - Hot Map
+
+ ![img](https://github.com/PetteriHavia/MapApp/blob/56b37ffd861a3f14fc8dbf9258dcc390abb54616/src/assets/readme_images/map-default.jpg)
+
   
 Happy mapping! 🗺️
