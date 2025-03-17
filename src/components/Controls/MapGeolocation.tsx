@@ -2,6 +2,7 @@ import { useState } from "react";
 import { getAddress } from "../../services/nominativeService";
 import { Coords } from "../../types";
 import ErrorMessage from "../ErrorMessage";
+import useDebounce from "../../hooks/useDebounce";
 
 type Props = {
   setLocation: React.Dispatch<React.SetStateAction<Coords | undefined>>;
@@ -13,6 +14,7 @@ const MapGeolocation = ({ setLocation }: Props) => {
 
   const handleSearchAddress = async () => {
     try {
+      console.log("Search triggered");
       setError(null);
       const searchAddress = await getAddress(address);
       if (!searchAddress) {
@@ -29,6 +31,8 @@ const MapGeolocation = ({ setLocation }: Props) => {
     }
   };
 
+  const debounceHandleSearch = useDebounce(handleSearchAddress, 1000);
+
   return (
     <div className="flex flex-col">
       {error && <ErrorMessage message={error} />}
@@ -39,7 +43,7 @@ const MapGeolocation = ({ setLocation }: Props) => {
         value={address}
         onChange={(e) => setAddress(e.target.value)}
       />
-      <button className="btn-primary w-full" onClick={handleSearchAddress}>
+      <button className="btn-primary w-full" onClick={debounceHandleSearch}>
         Search
       </button>
     </div>
